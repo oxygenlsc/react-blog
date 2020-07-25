@@ -1,0 +1,79 @@
+.rigt-myself{
+    width: 100%;
+    height: 100%;
+    .head{
+        border-radius: 8px;
+        background-color: rgba(255,255,255,0.6);
+        padding: 10px 0;
+        .img-box{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            box-shadow: 0px 2px 6px #f80, 3px 3px 20px rgb(136, 7, 129);
+            img{
+                transition: all 1s cubic-bezier(0.39, -0.26, 0.47, 1.01);
+                width: 100%;
+            }
+        }
+        .my-des{
+            margin: 0 auto;
+            padding: 0;
+            li{
+                text-align: center;
+                list-style: none;
+                // padding-bottom: 5px;
+            }
+        }
+        .commulition{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            display: flex;
+            justify-content: center;
+            div{
+                font-size: 25px;
+                margin: 0 5px;
+                color: #f80;
+            }
+        }
+    }
+    .tag{
+        border-radius: 8px;
+        background-color: rgba(255,255,255,0.6);
+        min-height: 200px;
+        margin-top: 10px;
+        width: 100%;
+        display: inline-block;
+        padding: 10px;
+        box-sizing: border-box;
+        p{
+            font-size: 18px;
+            background-color: rgba(121, 16, 16, 0.5);
+            box-shadow:1px 2px 3px #f80,1px 2px 6px rgb(236, 6, 186);
+            border-radius: 3px;
+            text-align: center;
+        }
+        span{
+            margin: 3px;
+            display: inline-block;
+            font-weight: bold;
+            padding: 0 3px;
+            background-color: rgba(26, 24, 24, 0.2);
+            box-shadow:1px 2px 3px #f80,1px 2px 6px rgb(219, 31, 178);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s linear;
+        }
+        span:hover{
+            transform: scale(1.05);
+        }
+    }
+}
+.head-img-box{
+    width: 80px;
+    img{
+        width: 100%;
+    }
+}

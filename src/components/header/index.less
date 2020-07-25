@@ -1,0 +1,129 @@
+.header-wrapper{
+    width: 100%;
+    height: 70px;
+    border-top:1px solid #ccc ;
+    border-bottom:1px solid #ccc ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0px 3px 7px #8b939b;
+    z-index: 66;
+    .header-box{
+        cursor: pointer;
+        width:1200px;
+        .Logo-box{
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            font-size: 20px;
+            align-items: center;
+            font-weight: bold;
+           font-family: Arial, Helvetica, sans-serif;
+            i{
+                width: 80px;
+                border: 1px solid #000000;
+                background: #000;
+            }
+        }
+        .link-box{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            a{
+                color: #303133;
+                font-size: 16px;
+                padding: 10px 20px;
+                font-family: fantasy;
+ 
+            }
+            .active{
+                color: rgb(91, 182, 212);
+            }
+        }
+       
+    }
+   
+}
+.mobile-content{
+    display: none;
+}
+.name-des{
+    color: rgb(183, 0, 255);
+}
+.Logo{
+    position: absolute;
+    right:10px;
+    width: 65px;
+    height: 65px;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+.body-content{
+   padding-top: 100px;
+   width: 1200px;
+//    height: 3000px;
+   margin: 0 auto;
+
+}
+.mobile-box{
+    display: none;
+}
+@media  (max-width : 1000px){
+    html,body{
+        width:100%;
+        height: 100%;
+        background-color: #1890ff5e;
+        .header-box{
+            display: none
+        }
+        .mobile-box{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+            .mobile-title{
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .mobile-menu{
+                position: absolute;
+                right: 10px;
+            }
+        }
+        .body-content{
+            display: none;
+        }
+        .mobile-content{
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding-top: 70px; 
+            position: relative;
+            .msg-box{
+                position: absolute;
+                width: 200px;
+                height: 116px;
+                top: 350px;
+                color: #917159;
+                font-size: 16px;
+                padding: 12px;
+                border: 2px solid rgb(236, 203, 180);
+                background: rgb(252, 248, 244);
+                box-sizing: border-box;
+                border-radius: 10px;
+                transform: rotate(-2deg);
+                transition: 200ms opacity;
+                box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+                animation: live2d-widget-dialog-tingle 4s ease-in-out 0s infinite alternate;
+            }
+            }
+    }
+        /* 再这种方式中最好写在最后面应为媒体查询时不占权重的当权重一样时后面的覆盖前面的 */
+};

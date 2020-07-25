@@ -1,0 +1,37 @@
+.item-box{
+   width: 75%;
+   background-color: rgba(255, 255, 255, 0.4);
+   padding:20px;
+   padding-bottom: 50px;
+   border-radius: 10px;
+   margin-bottom: 10px;
+   min-height: 600px;
+   position: relative;
+   .pgg{
+     position: absolute;
+     bottom: 10px;
+   }
+}
+.every-Day{
+  transition: color 800ms linear;
+}
+.item-enter {
+    opacity: 0;
+    margin-left: -300px;
+  }
+  .item-enter-active {
+    opacity: 1;
+    margin-left: 0px;
+    transition: all  500ms ease-in;
+  }
+  .item-exit {
+    opacity: 1;
+  }
+  .item-exit-active {
+    opacity: 0;
+    transition: all 500ms ease-in;
+  }
+  .my-self-box{
+    width: 23%;
+   
+  }

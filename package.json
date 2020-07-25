@@ -1,0 +1,46 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^4.2.1",
+    "@ant-design/pro-layout": "^5.0.12",
+    "@types/react-transition-group": "^4.4.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.2.7",
+    "animate.css": "^4.1.0",
+    "antd-img-crop": "^3.9.0",
+    "axios": "^0.19.2",
+    "highlight.js": "^10.1.1",
+    "jquery": "^3.5.1",
+    "lint-staged": "^10.0.7",
+    "live2d-widget": "^3.1.4",
+    "marked": "^1.1.1",
+    "prettier": "^1.19.1",
+    "react": "^16.12.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "^16.12.0",
+    "react-markdown": "^4.3.1",
+    "react-transition-group": "^4.4.1",
+    "react-tsparticles": "^1.16.2",
+    "umi": "^3.2.7",
+    "yorkie": "^2.0.0"
+  }
+}
