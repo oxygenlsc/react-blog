@@ -1,94 +1,92 @@
 #components-layout-demo-fixed .logo {
-    width: 120px;
-    height: 31px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px 24px 16px 0;
-    float: left;
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+.edit-warpper {
+  width: 100%;
+  min-height: 670px;
+  position: relative;
+  background-color: #f4f5f5;
+  .edit-inp-box {
+    position: absolute;
+    width: 30%;
+    height: 600px;
+    border: 1px solid #000;
+    top: 8%;
+    // transform: translateX(-30%);
+    left: 25%;
+    font-size: 19px;
   }
-  .site-layout .site-layout-background {
-    background: #fff;
+  .show-html {
+    width: 30%;
+    height: 600px;
+    top: 8%;
+    border: 1px solid #000;
+    position: absolute;
+    // transform: translateX(-30%);
+    left: 55%;
+    overflow: auto;
+    background-color: rgba(3, 3, 3, 0.466);
   }
-  .edit-warpper{
-    width: 100%;
-    min-height: 670px;
-    position: relative;
-    background-color: #f4f5f5;;
-    .edit-inp-box{
-      position: absolute;
-      width: 25%;
-      height: 600px;
-      border: 1px solid #000;
-      top: 8%;
-      // transform: translateX(-30%);
-      left: 25%;
-      font-size: 19px;
+  .md-rule-show {
+    position: fixed;
+    width: 300px;
+    border: 1px solid #000;
+    top: 20%;
+    left: 1%;
+    font-size: 19px;
+    overflow: auto;
+    font-family: '宋体';
+    color: rgb(44, 42, 40);
+    font-weight: bold;
+    transition: all 0.2s linear;
+    opacity: 0;
+    height: 0;
+  }
+  .send-img {
+    position: fixed;
+    top: 20%;
+    left: 1%;
+    width: 300px;
+    transition: all 0.2s linear;
+    height: 0;
+    // height: 500px;
+    border: 1px solid #f80;
+    opacity: 0;
+  }
+}
+.urlList {
+  list-style: none;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  li {
+    border-bottom: 1px solid #000;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5px 0;
+    margin: 5px;
+    .img-name {
+      max-width: 10%;
+      height: 100%;
+      color: #f80;
     }
-    .show-html{
-      width: 25%;
-      height: 600px;
-      top:8%;
-      border: 1px solid #000;
-      position: absolute;
-      // transform: translateX(-30%);
-      left: 50%;
-      overflow: auto;
-      background-color: rgba(3, 3, 3, 0.466);
-    }
-    .md-rule-show{
-      position: fixed;
-      width: 300px;
-      border: 1px solid #000;
-      top: 20%;
-      left:1%;
-      font-size: 19px;
-      overflow: auto;
-      font-family: '宋体';
-      color: rgb(44, 42, 40);
-      font-weight: bold;
-      transition: all 0.2s linear;
-      opacity: 0;
-      height: 0;
-    }
-    .send-img{
-      position: fixed;
-      top: 20%;
-      left:1%;
-      width: 300px;
-      transition: all 0.2s linear;
-      height: 0;
-      // height: 500px;
-      border: 1px solid #f80;
-      opacity: 0;
+    .img-url {
+      width: 80%;
+      height: 100%;
+      color: #f80;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      margin-left: 30px;
+      cursor: pointer;
     }
   }
-  .urlList{
-    list-style: none;
-    width: 100%;
-    overflow: hidden;
-    padding: 0;
-    li{
-      border-bottom: 1px solid #000;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 5px 0 ;
-      margin: 5px;
-      .img-name{
-          max-width: 10%;
-          height: 100%;
-          color: #f80;
-      }
-      .img-url{
-        width: 80%;
-        height: 100%;
-        color: #f80;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        margin-left: 30px;
-        cursor: pointer;
-      }
-    }
-  
-    
-  }
+}
