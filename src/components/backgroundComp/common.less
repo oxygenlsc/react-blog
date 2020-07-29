@@ -20,7 +20,7 @@
     border: 1px solid #000;
     top: 8%;
     // transform: translateX(-30%);
-    left: 25%;
+    left: 20%;
     font-size: 19px;
   }
   .show-html {
@@ -30,14 +30,14 @@
     border: 1px solid #000;
     position: absolute;
     // transform: translateX(-30%);
-    left: 55%;
+    left: 50%;
     overflow: auto;
     background-color: rgba(3, 3, 3, 0.466);
   }
   .md-rule-show {
     position: fixed;
-    width: 300px;
-    border: 1px solid #000;
+    width: 280px;
+    border: 1px solid #f80;
     top: 20%;
     left: 1%;
     font-size: 19px;
@@ -53,11 +53,20 @@
     position: fixed;
     top: 20%;
     left: 1%;
-    width: 300px;
+    width: 280px;
     transition: all 0.2s linear;
     height: 0;
-    // height: 500px;
-    border: 1px solid #f80;
+    border: 1px solid lightblue;
+    opacity: 0;
+  }
+  .artic-detail {
+    position: fixed;
+    top: 20%;
+    left: 1%;
+    width: 280px;
+    transition: all 0.2s linear;
+    height: 0;
+    border: 1px solid rgba(118, 252, 28, 0.897);
     opacity: 0;
   }
 }
@@ -89,4 +98,9 @@
       cursor: pointer;
     }
   }
+}
+.submit {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
 }

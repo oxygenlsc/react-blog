@@ -12,6 +12,7 @@ export default function BlogEdit(props) {
   const [sc, setsc] = useState('');
   const [rule, setrule] = useState(false);
   const [imgsend, setimgsend] = useState(false);
+  const [detail, setdetail] = useState(false);
   const [myfileList, setFileList] = useState([]);
   const [blogDetail, setblogDetail] = useState({
     title: '',
@@ -22,9 +23,11 @@ export default function BlogEdit(props) {
   const showAndHide = () => {
     setrule(!rule);
     setimgsend(false);
+    setdetail(false);
   };
   const showImg = () => {
     setrule(false);
+    setdetail(false);
     setimgsend(!imgsend);
   };
   const onChange = ({ file }) => {
@@ -34,11 +37,22 @@ export default function BlogEdit(props) {
     } else {
     }
   };
+  const showDetail = () => {
+    setrule(false);
+    setimgsend(false);
+    setdetail(!detail);
+  };
   const pdata = {
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
     listType: 'picture',
     // defaultFileList: [...myfileList],
     data: { id: 123 }, //这个地方就是上传时的标识
+  };
+  const setDetail = (type, data) => {
+    setblogDetail({
+      ...blogDetail,
+      [type]: data,
+    });
   };
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -47,6 +61,7 @@ export default function BlogEdit(props) {
         title="语法展开"
         top="80px"
         left="30px"
+        bg="#f80"
         click={showAndHide}
       />
       <Button2
@@ -54,7 +69,16 @@ export default function BlogEdit(props) {
         title="上传图片"
         top="80px"
         left="120px"
+        bg="lightblue"
         click={showImg}
+      />
+      <Button2
+        type="oneStyle"
+        title="文章细节"
+        top="80px"
+        left="210px"
+        bg=""
+        click={showDetail}
       />
       <div className="edit-warpper">
         <TextArea
@@ -135,6 +159,63 @@ export default function BlogEdit(props) {
             </Button>
           </Upload>
           <ul className="urlList">{myfileList.map((el, i) => creatLi(el))}</ul>
+        </div>
+        <div
+          className="artic-detail"
+          style={{ opacity: detail ? 1 : 0, height: detail ? 500 : 0 }}
+        >
+          <div className="atrc-title">
+            <h1>标题</h1>{' '}
+            <Input
+              className="title"
+              value={blogDetail.title}
+              onChange={e => {
+                setDetail('title', e.target.value);
+              }}
+            ></Input>
+          </div>
+          <div className="atrc-des">
+            <h1>解释</h1>{' '}
+            <TextArea
+              className="des"
+              value={blogDetail.des}
+              onChange={e => {
+                setDetail('des', e.target.value);
+              }}
+            ></TextArea>
+          </div>
+          <div className="atrc-tg">
+            <h1>标签</h1>
+            <Input
+              className="tag"
+              value={blogDetail.tag}
+              onChange={e => {
+                setDetail('tag', e.target.value);
+              }}
+            ></Input>
+          </div>
+          <div className="atrc-author">
+            <h1>作者</h1>
+            <Input
+              className="author"
+              value={blogDetail.author}
+              onChange={e => {
+                setDetail('author', e.target.value);
+              }}
+            ></Input>
+          </div>
+          <div className="submit">
+            <Button
+              shape="round"
+              type="primary"
+              onClick={() => {
+                console.log(inp);
+                console.log(blogDetail);
+              }}
+            >
+              提交blog
+            </Button>
+          </div>
         </div>
       </div>
     </div>
