@@ -5,7 +5,9 @@ import { Input, Upload, Button, Tooltip } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 // import ImgCrop from 'antd-img-crop';
 import { Button1, Button2 } from '@/components/signButton/Button';
+import HeadingBlock from '../mdHeading/headingBolck';
 import '@/assets/mdless/index.less';
+import heading from '../mdHeading/heading';
 const { TextArea } = Input;
 export default function BlogEdit(props) {
   const [inp, setinp] = useState(``);
@@ -97,7 +99,12 @@ export default function BlogEdit(props) {
             setsc(e);
           }}
         >
-          <ReactMarkdown source={inp} />
+          <ReactMarkdown
+            source={inp}
+            renderers={{
+              heading: HeadingBlock,
+            }}
+          />
         </div>
         <div
           className="md-rule-show"
@@ -164,58 +171,62 @@ export default function BlogEdit(props) {
           className="artic-detail"
           style={{ opacity: detail ? 1 : 0, height: detail ? 500 : 0 }}
         >
-          <div className="atrc-title">
-            <h1>标题</h1>{' '}
-            <Input
-              className="title"
-              value={blogDetail.title}
-              onChange={e => {
-                setDetail('title', e.target.value);
-              }}
-            ></Input>
-          </div>
-          <div className="atrc-des">
-            <h1>解释</h1>{' '}
-            <TextArea
-              className="des"
-              value={blogDetail.des}
-              onChange={e => {
-                setDetail('des', e.target.value);
-              }}
-            ></TextArea>
-          </div>
-          <div className="atrc-tg">
-            <h1>标签</h1>
-            <Input
-              className="tag"
-              value={blogDetail.tag}
-              onChange={e => {
-                setDetail('tag', e.target.value);
-              }}
-            ></Input>
-          </div>
-          <div className="atrc-author">
-            <h1>作者</h1>
-            <Input
-              className="author"
-              value={blogDetail.author}
-              onChange={e => {
-                setDetail('author', e.target.value);
-              }}
-            ></Input>
-          </div>
-          <div className="submit">
-            <Button
-              shape="round"
-              type="primary"
-              onClick={() => {
-                console.log(inp);
-                console.log(blogDetail);
-              }}
-            >
-              提交blog
-            </Button>
-          </div>
+          {detail ? (
+            <>
+              <div className="atrc-title">
+                <h1>标题</h1>
+                <Input
+                  className="title"
+                  value={blogDetail.title}
+                  onChange={e => {
+                    setDetail('title', e.target.value);
+                  }}
+                ></Input>
+              </div>
+              <div className="atrc-des">
+                <h1>解释</h1>
+                <TextArea
+                  className="des"
+                  value={blogDetail.des}
+                  onChange={e => {
+                    setDetail('des', e.target.value);
+                  }}
+                ></TextArea>
+              </div>
+              <div className="atrc-tg">
+                <h1>标签</h1>
+                <Input
+                  className="tag"
+                  value={blogDetail.tag}
+                  onChange={e => {
+                    setDetail('tag', e.target.value);
+                  }}
+                ></Input>
+              </div>
+              <div className="atrc-author">
+                <h1>作者</h1>
+                <Input
+                  className="author"
+                  value={blogDetail.author}
+                  onChange={e => {
+                    setDetail('author', e.target.value);
+                  }}
+                ></Input>
+              </div>
+              <div className="submit">
+                <Button
+                  shape="round"
+                  type="primary"
+                  onClick={() => {
+                    console.log(inp);
+                    console.log(blogDetail);
+                  }}
+                >
+                  提交blog
+                </Button>
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </div>
