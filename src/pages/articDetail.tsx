@@ -7,7 +7,7 @@ import $ from 'jquery';
 import '@/assets/style/articdetail.less';
 import '@/assets/mdless/index.less';
 import { LikeTwoTone, EyeTwoTone } from '@ant-design/icons';
-export default function ArticDetail(props) {
+export default function ArticDetail(props: any) {
   useEffect(() => {
     const harr = $('#md h1');
     const heightArr = [];
@@ -16,7 +16,7 @@ export default function ArticDetail(props) {
       heightArr.push(el.offsetTop);
     }
     let luck = true;
-    const scroolEve = e => {
+    const scroolEve = event => {
       const scrollTop =
         (event.srcElement
           ? event.srcElement.documentElement.scrollTop
