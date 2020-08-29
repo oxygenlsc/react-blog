@@ -12,23 +12,23 @@ export default function Index(props?: itemProps) {
   return (
     <div className="item-wrapper" id="itemDom">
       <div className="title">
-        <Link to={`/articDetail?id=${122}`}>{props.artic.title}</Link>
+        <Link to={`/articDetail?id=${122}`}>{props.artic.Btitle}</Link>
       </div>
       <div className="des">
         <div className="time">
-          <CalendarTwoTone twoToneColor="#eb2f96" />:{props.artic.time}
+          <CalendarTwoTone twoToneColor="#eb2f96" />:{props.artic.updatedAt}
         </div>
         <div className="tag">
-          <TagTwoTone twoToneColor="#52c41a" />:{props.artic.tag}
+          <TagTwoTone twoToneColor="#52c41a" />:{props.artic.Btags}
         </div>
         <div className="hot">
-          <FireTwoTone twoToneColor="#f80" /> :{props.artic.view}{' '}
+          <FireTwoTone twoToneColor="#f80" /> :{props.artic.Bview}{' '}
         </div>
         <div className="goof">
-          <LikeTwoTone />:{props.artic.good}
+          <LikeTwoTone />:{props.artic.Blike}
         </div>
       </div>
-      <div className="artic-content">{props.artic.desc}</div>
+      <div className="artic-content">{props.artic.Bdesc}</div>
     </div>
   );
 }

@@ -1,9 +1,11 @@
 export interface itemProps {
-    artic:{
-        title:string,
-        time:string,
-        content:any,
-        view:string,
-        tag:string
-    }
+  artic: {
+    Btitle: string;
+    updatedAt: string;
+    content: any;
+    Bview: string;
+    Btags: string;
+    Blike: string;
+    Bdesc: string;
+  };
 }

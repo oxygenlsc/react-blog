@@ -4,8 +4,12 @@ import { NotificationOutlined } from '@ant-design/icons';
 import { getRandom } from '@/utils/util';
 import { Pagination } from 'antd';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { connect } from 'dva';
 import './common.less';
-export default function articItemBox(props: any) {
+
+function articItemBox(props: any) {
+  const { dispatch } = props;
+  const { blogItemArr } = props.blog;
   const [itemarr, setitemarr] = useState([
     {
       title: '写死的title',
@@ -35,8 +39,17 @@ export default function articItemBox(props: any) {
       setcolor(rgb);
     }, 2000);
   }, []);
-  const itemArr = itemarr.map((el, i) => (
-    <CSSTransition key={i} timeout={500} classNames="item">
+  useEffect(() => {
+    dispatch({
+      type: 'blog/getItem',
+      payload: {
+        page: 1,
+        limit: 10,
+      },
+    });
+  }, []);
+  const itemArr = blogItemArr.map((el, i) => (
+    <CSSTransition key={el.id} timeout={500} classNames="item">
       <Item artic={el}></Item>
     </CSSTransition>
   ));
@@ -59,3 +72,4 @@ export default function articItemBox(props: any) {
     </div>
   );
 }
+export default connect(blog => blog)(articItemBox);
