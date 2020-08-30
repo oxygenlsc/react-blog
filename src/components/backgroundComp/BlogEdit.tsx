@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './common.less';
 import ReactMarkdown from 'react-markdown';
-import { Input, Upload, Button, Tooltip } from 'antd';
+import { Input, Upload, Button, Tooltip, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 // import ImgCrop from 'antd-img-crop';
 import { Button1, Button2 } from '@/components/signButton/Button';
 import HeadingBlock from '../mdHeading/headingBolck';
 import '@/assets/mdless/index.less';
 import heading from '../mdHeading/heading';
+import { connect } from 'dva';
 const { TextArea } = Input;
-export default function BlogEdit(props) {
+function BlogEdit(props: any) {
+  const { dispatch } = props;
   const [inp, setinp] = useState(``);
   const [sc, setsc] = useState('');
   const [rule, setrule] = useState(false);
@@ -218,8 +220,29 @@ export default function BlogEdit(props) {
                   shape="round"
                   type="primary"
                   onClick={() => {
-                    console.log(inp);
-                    console.log(blogDetail);
+                    const addData = {
+                      Bauthor: blogDetail.author,
+                      Btitle: blogDetail.title,
+                      Bdesc: blogDetail.des,
+                      Btags: blogDetail.tag,
+                      Bcontent: inp,
+                    };
+                    for (const key in addData) {
+                      if (addData.hasOwnProperty(key)) {
+                        const el = addData[key];
+                        if (el == '') {
+                          message.error('请输入' + key);
+                          return;
+                        }
+                      }
+                    }
+                    dispatch({
+                      type: 'blog/addBlog',
+                      payload: addData,
+                    }).then(res => {
+                      message.success(res.msg);
+                    });
+                    console.log(addData);
                   }}
                 >
                   提交blog
@@ -245,3 +268,5 @@ function creatLi(props) {
     </li>
   );
 }
+
+export default connect()(BlogEdit);

@@ -4,7 +4,9 @@ import Footer from '../components/footer';
 import Login from '@/components/login';
 import { getRandom } from '@/utils/util';
 import { L2Dwidget } from 'live2d-widget';
+import { CookieDo } from '@/utils/util';
 import Bg from '../components/background';
+
 export default function Index(props: any) {
   useEffect(() => {
     let url = '';
@@ -76,7 +78,22 @@ export default function Index(props: any) {
       },
     });
   }, []);
+  const isJump = path => {
+    const data = CookieDo.get('loginSuccess');
+    if (path == '/login' && data) {
+      props.history.push('/edit');
+      // return <>{props.children}</>;
+    }
+    if (path.includes('/edit')) {
+      if (data) {
+        return <>{props.children}</>;
+      } else {
+        props.history.push('/login');
+      }
+    }
+  };
   if (props.location.pathname === '/login') {
+    isJump(props.location.pathname);
     return (
       <>
         <Bg></Bg>
@@ -85,8 +102,10 @@ export default function Index(props: any) {
     );
   }
   if (props.location.pathname.includes('/edit')) {
+    isJump(props.location.pathname);
     return <>{props.children}</>;
   }
+
   return (
     <div>
       <Bg></Bg>

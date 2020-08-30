@@ -7,7 +7,26 @@ import $ from 'jquery';
 import '@/assets/style/articdetail.less';
 import '@/assets/mdless/index.less';
 import { LikeTwoTone, EyeTwoTone } from '@ant-design/icons';
-export default function ArticDetail(props: any) {
+import { connect } from 'dva';
+function ArticDetail(props: any) {
+  const { dispatch } = props;
+  useEffect(() => {
+    const id = props.history.location.query.id;
+    const senddata = {
+      type: 'id',
+      id,
+    };
+    dispatch({
+      type: 'blog/getDetail',
+      payload: senddata,
+    }).then(res => {
+      console.log(res);
+      if (res.success) {
+        setdetailMsg(res.data);
+        setmenuitem(getStringArr(res.data.Bcontent, '~~'));
+      }
+    });
+  }, []);
   useEffect(() => {
     const harr = $('#md h1');
     const heightArr = [];
@@ -41,11 +60,11 @@ export default function ArticDetail(props: any) {
       window.removeEventListener('scroll', scroolEve);
     };
   }, []);
-
+  const [detailMsg, setdetailMsg] = useState({});
   const [Fixed, setFixed] = useState(false);
-  const [menuitem, setmenuitem] = useState(getStringArr(test, '#', '\n'));
+  const [menuitem, setmenuitem] = useState([]);
   const [curTitle, setcurTitle] = useState('');
-  const [heightarr, setheightarr] = useState([]);
+  // const [heightarr, setheightarr] = useState([]);
   const liList = menuitem.map((el, i) => (
     <li
       key={i}
@@ -71,7 +90,7 @@ export default function ArticDetail(props: any) {
       <div className="left-btn-box"></div>
       <div className="middle-article" id="md">
         <ReactMarkdown
-          source={test}
+          source={detailMsg.Bcontent}
           renderers={{
             heading: HeadingBlock,
           }}
@@ -89,10 +108,11 @@ export default function ArticDetail(props: any) {
             </li>
             <li>
               {' '}
-              <LikeTwoTone twoToneColor="#f80" /> 获得点赞 49
+              <LikeTwoTone twoToneColor="#f80" /> 获得点赞{' '}
+              {detailMsg.Blike ? detailMsg.Blike : 0}
             </li>
             <li>
-              <EyeTwoTone /> 阅读量 48
+              <EyeTwoTone /> 阅读量 {detailMsg.Bview ? detailMsg.Bview : 0}
             </li>
           </ul>
         </div>
@@ -111,3 +131,5 @@ export default function ArticDetail(props: any) {
     </div>
   );
 }
+
+export default connect(blog => blog)(ArticDetail);

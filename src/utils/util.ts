@@ -43,11 +43,85 @@ export const waterFull = (classname, contentname, itemwidth, cloum) => {
   document.getElementById(contentname).style.height = Math.max(...colY) + 'px';
 };
 
-export const getStringArr = (str, left, right) => {
-  return S(str)
-    .parseCSV(left)
-    .map(el => {
-      return el.split(right)[0];
-    })
-    .filter((el, i) => i != 0);
+export const getStringArr = (str, fstr) => {
+  console.log(str);
+  if (!str) {
+    return ['nothing'];
+  }
+  let dataArr: any = [];
+  str.split('#').forEach(el => {
+    const data = el.split('\n').forEach(item => {
+      if (item.includes(fstr)) {
+        item = item.replace(fstr, '');
+        dataArr.push(item?.trim());
+      }
+    });
+  });
+
+  if (!dataArr) {
+    return [];
+  }
+  console.log(dataArr);
+  return dataArr;
+};
+
+export const CookieDo = {
+  set(key: any, value: any, delay: any): any {
+    if (delay == 'undefined') delay = '7d';
+    delay = delay.toLowerCase();
+
+    var expireDate = new Date();
+
+    var num = parseInt(delay);
+    if (delay.indexOf('d') !== -1) {
+      expireDate.setDate(expireDate.getDate() + num);
+    } else if (delay.indexOf('h') !== -1) {
+      expireDate.setHours(expireDate.getHours() + num);
+    } else if (delay.indexOf('m') !== -1) {
+      expireDate.setMinutes(expireDate.getMinutes() + num);
+    } else if (delay.indexOf('s') !== -1) {
+      expireDate.setSeconds(expireDate.getSeconds() + num);
+    } else {
+      expireDate.setDate(expireDate.getDate() + num);
+    }
+    if (typeof value == 'object') {
+      value = JSON.stringify(value);
+    }
+    value = escape(value);
+    document.cookie =
+      key + '=' + value + ';expires=' + expireDate.toGMTString();
+    return this.get(key);
+  },
+  get(key: string): any {
+    var objCookie = {};
+    var cookie = document.cookie;
+    var keyValueList = cookie.split(';');
+    for (var index in keyValueList) {
+      var keyValue = keyValueList[index].split('=');
+      var k = keyValue[0].trim();
+      var v = keyValue[1];
+      v = unescape(v);
+      v = this.decodeJson(v);
+      objCookie[k] = v;
+    }
+
+    if (typeof key == 'undefined') {
+      return objCookie;
+    }
+
+    return objCookie[key];
+  },
+  decodeJson(value: any) {
+    //数组转成的对象字符串
+    var regAryStr = /^\[[\s|\S]*\]$/;
+    //对象转成的对象字符串
+    var regObjStr = /^\{([\"\s|\S]+\"\:\"[\s|\S]*)+\"\}$/;
+    if (regAryStr.test(value)) {
+      return eval('(' + value + ')');
+    }
+    if (regObjStr.test(value)) {
+      return JSON.parse(value);
+    }
+    return value;
+  },
 };
