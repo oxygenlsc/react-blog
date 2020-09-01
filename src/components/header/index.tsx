@@ -57,7 +57,7 @@ function Index(props: any) {
                 &nbsp;
                 <span>关于我</span>
               </NavLink>
-              <NavLink to="/c">
+              <NavLink to="/Map">
                 <FileImageFilled />
                 &nbsp;
                 <span>Map</span>
