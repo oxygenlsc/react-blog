@@ -543,7 +543,7 @@ export const bgc = {
         factor: 1000,
       },
       limit: 0,
-      value: 80,
+      value: 50,
     },
     opacity: {
       animation: {
