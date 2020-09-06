@@ -70,24 +70,25 @@ function Index(props) {
         </div>
       </div>
       <div className="tag">
-        {TagArr.map(el => {
-          const color = `rgb(${getRandom(0, 255)},${getRandom(
-            0,
-            255,
-          )},${getRandom(0, 255)})`;
-          const fontsize = `${getRandom(15, 25)}px`;
-          return (
-            <span
-              key={el.id}
-              style={{ color: color, fontSize: fontsize }}
-              onClick={() => {
-                props.tagClick(el.Tag);
-              }}
-            >
-              {el.Tag}
-            </span>
-          );
-        })}
+        {Array.isArray(TagArr) &&
+          TagArr.map(el => {
+            const color = `rgb(${getRandom(0, 255)},${getRandom(
+              0,
+              255,
+            )},${getRandom(0, 255)})`;
+            const fontsize = `${getRandom(15, 25)}px`;
+            return (
+              <span
+                key={el.id}
+                style={{ color: color, fontSize: fontsize }}
+                onClick={() => {
+                  props.tagClick(el.Tag);
+                }}
+              >
+                {el.Tag}
+              </span>
+            );
+          })}
       </div>
     </div>
   );

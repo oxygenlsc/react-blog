@@ -24,6 +24,34 @@ function BlogEdit(props: any) {
     tag: '',
     author: 'oxygen',
   });
+  const [isUpdate, setisUpdate] = useState(false);
+  useEffect(() => {
+    if (props.location.query?.blogid) {
+      setisUpdate(true);
+      setdetail(true);
+      dispatch({
+        type: 'background/getUpdateBlogDetail',
+        payload: {
+          id: props.location.query?.blogid,
+        },
+      }).then(res => {
+        if (res.success) {
+          console.log(res);
+          setinp(res.data.Bcontent);
+          setblogDetail({
+            title: res.data.Btitle,
+            des: res.data.Bdesc,
+            tag: res.data.Btags,
+            author: res.data.Bauthor,
+          });
+        } else {
+          message.error(res.msg);
+        }
+      });
+    } else {
+      setisUpdate(false);
+    }
+  }, []);
   const showAndHide = () => {
     setrule(!rule);
     setimgsend(false);
@@ -86,6 +114,7 @@ function BlogEdit(props: any) {
       />
       <div className="edit-warpper">
         <TextArea
+          value={inp}
           className="edit-inp-box"
           onChange={({ target: { value } }) => {
             setinp(value);
@@ -183,6 +212,7 @@ function BlogEdit(props: any) {
                   onChange={e => {
                     setDetail('title', e.target.value);
                   }}
+                  disabled={isUpdate}
                 ></Input>
               </div>
               <div className="atrc-des">
@@ -193,6 +223,7 @@ function BlogEdit(props: any) {
                   onChange={e => {
                     setDetail('des', e.target.value);
                   }}
+                  disabled={isUpdate}
                 ></TextArea>
               </div>
               <div className="atrc-tg">
@@ -203,6 +234,7 @@ function BlogEdit(props: any) {
                   onChange={e => {
                     setDetail('tag', e.target.value);
                   }}
+                  disabled={isUpdate}
                 ></Input>
               </div>
               <div className="atrc-author">
@@ -213,10 +245,12 @@ function BlogEdit(props: any) {
                   onChange={e => {
                     setDetail('author', e.target.value);
                   }}
+                  disabled={isUpdate}
                 ></Input>
               </div>
               <div className="submit">
                 <Button
+                  disabled={isUpdate}
                   shape="round"
                   type="primary"
                   onClick={() => {
@@ -242,10 +276,35 @@ function BlogEdit(props: any) {
                     }).then(res => {
                       message.success(res.msg);
                     });
-                    console.log(addData);
                   }}
                 >
                   提交blog
+                </Button>
+
+                <Button
+                  type="primary"
+                  disabled={!isUpdate}
+                  shape="round"
+                  onClick={() => {
+                    let flag = true;
+                    if (flag) {
+                      flag = false;
+                      dispatch({
+                        type: 'background/updateBlogs',
+                        payload: {
+                          id: props.location.query?.blogid,
+                          content: inp,
+                        },
+                      }).then(res => {
+                        if (res.success) {
+                          message.success(res.msg);
+                          flag = true;
+                        }
+                      });
+                    }
+                  }}
+                >
+                  确认修改
                 </Button>
               </div>
             </>

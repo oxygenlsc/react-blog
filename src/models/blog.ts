@@ -1,5 +1,5 @@
 import api from '@/services/blog';
-const { getBlogList, getBlogDetail, addBlog } = api;
+const { getBlogList, getBlogDetail, addBlog, getAllBlog } = api;
 export default {
   namespace: 'blog',
   state: {
@@ -44,6 +44,11 @@ export default {
       const response = yield call(addBlog, {
         jsonData,
       });
+      return response.data;
+    },
+    *getAllblogs({ payload }, { call, put, select }) {
+      console.log('adsad');
+      const response = yield call(getAllBlog, '');
       return response.data;
     },
   },

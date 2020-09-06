@@ -4,6 +4,9 @@ const BlogMethods = {
   getBlogList: `/api/app/blog/selectBlogByPage`, //获取博客列表
   getBlogDetail: `/api/app/blog/selectBlogByType`, //获取文章细节
   addBlog: `POST /api/app/blog/addblog`,
+  getAllBlog: `/api/app/blog/getAllblog`,
+  getUpdateBlogDetail: `/api/app/blog/getBlogDetail`, //修改页面的回显
+  updateBlog: `/api/app/blog/updateBlog`,
 };
 const APIFunction: any = {};
 

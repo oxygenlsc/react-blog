@@ -33,6 +33,7 @@
     "lint-staged": "^10.0.7",
     "live2d-widget": "^3.1.4",
     "marked": "^1.1.1",
+    "moment": "^2.27.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-addons-css-transition-group": "^15.6.2",

@@ -8,6 +8,7 @@ import {
 import './index.less';
 import { itemProps } from '@/utils/tsConfig/interface';
 import { Link, NavLink } from 'umi';
+import moment from 'moment';
 export default function Index(props?: itemProps) {
   return (
     <div className="item-wrapper" id="itemDom">
@@ -18,7 +19,8 @@ export default function Index(props?: itemProps) {
       </div>
       <div className="des">
         <div className="time">
-          <CalendarTwoTone twoToneColor="#eb2f96" />:{props.artic.updatedAt}
+          <CalendarTwoTone twoToneColor="#eb2f96" />:
+          {moment(props.artic.updatedAt).format('YYYY年MM月DD日 hh时mm分ss秒 ')}
         </div>
         <div className="tag">
           <TagTwoTone twoToneColor="#52c41a" />:{props.artic.Btags}

@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import './index.less';
 import MapItem from './mapItem';
+
 export default function MapBox(props: any) {
-  const [arr, setarr] = useState([1, 3, 3, 4, 3, 2, 3, 4]);
+  // const [arr, setarr] = useState();
   useEffect(() => {
     // arr.length
   }, []);
-  const list = arr.map((el, i) => (
+  const list = props.allblog.map((el, i) => (
     <MapItem
       type={(i + 1) % 2 == 0 ? 'right' : 'left'}
       left={(i + 1) % 2 == 0 ? '60%' : '30%'}
-      top={40 + i * 160}
+      top={50 + i * 160}
+      i={i}
+      data={el}
     />
   ));
   return (
-    <div className="map-Box-container">
+    <div
+      className="map-Box-container "
+      style={{ height: `${props.allblog.length * 160 + 40}px` }}
+    >
       <div
         className="map-midde-line"
-        style={{ height: `${arr.length * 160 + 40}px` }}
+        style={{
+          animation: `heights ${props.allblog.length}s linear  forwards `,
+        }}
       ></div>
       {list}
       {/* <MapItem top={300}/>  */}
