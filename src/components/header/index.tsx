@@ -81,9 +81,9 @@ function Index(props: any) {
           </Col>
         </Row>
       </div>
-      <div className="Logo">
+      {/* <div className="Logo">
         <img src={Logo} alt="" />
-      </div>
+      </div> */}
       <div className="mobile-box">
         <div className="mobile-title">Oxygenの博客</div>
       </div>

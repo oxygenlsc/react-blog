@@ -378,12 +378,15 @@ export const bgc = {
     cover: {
       color: {
         value: {
-          r: 200,
-          g: 230,
-          b: 220,
+          // r: 200,
+          // g: 230,
+          // b: 220,
+          r: 0,
+          g: 0,
+          b: 0,
         },
       },
-      opacity: 1,
+      opacity: 0.4,
     },
     enable: true,
   },
@@ -400,7 +403,7 @@ export const bgc = {
     detectsOn: 'window',
     events: {
       onClick: {
-        enable: true,
+        enable: false,
         mode: 'push',
       },
       onDiv: {
@@ -430,7 +433,7 @@ export const bgc = {
         distance: 400,
         duration: 2,
         opacity: 1,
-        size: 100,
+        size: 50,
       },
       connect: {
         distance: 80,
@@ -543,7 +546,7 @@ export const bgc = {
         factor: 1000,
       },
       limit: 0,
-      value: 50,
+      value: 30,
     },
     opacity: {
       animation: {
