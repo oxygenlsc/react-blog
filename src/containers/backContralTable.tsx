@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './style/index.less';
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Tag, Space, Button, Radio, message } from 'antd';
 import { connect } from 'dva';
 import moment from 'moment';
 import { history } from 'umi';
@@ -9,11 +9,18 @@ function backContralTable(props: any) {
     page: 1,
     limit: 10,
   });
+  const [linkpage, setlinkpage] = useState(1);
   const { dispatch } = props;
   useEffect(() => {
     dispatch({
       type: 'background/backgroundGetItem',
       payload: limit,
+    });
+    dispatch({
+      type: 'friendlink/selectFriendLinkByPage',
+      payload: {
+        page: linkpage,
+      },
     });
   }, []);
   const columns = [
@@ -21,39 +28,34 @@ function backContralTable(props: any) {
       title: '标题',
       dataIndex: 'Btitle',
       key: 'Btitle',
-      render: text => <a>{text}</a>,
     },
     {
       title: '作者',
       dataIndex: 'Bauthor',
       key: 'Bauthor',
-      render: text => <a>{text}</a>,
     },
     {
       title: '标签',
       key: 'Btags',
       dataIndex: 'Btags',
-      render: text => <a>{text}</a>,
     },
     {
       title: '查看',
       key: 'Bview',
       dataIndex: 'Bview',
-      render: text => <a>{text ? text : 0}</a>,
+      render: text => <span>{text ? text : 0}</span>,
     },
     {
       title: '点赞',
       key: 'Blike',
       dataIndex: 'Blike',
-      render: text => <a>{text ? text : 0}</a>,
+      render: text => <span>{text ? text : 0}</span>,
     },
     {
       title: '最后更新时间',
       key: 'updatedAt',
       dataIndex: 'updatedAt',
-      render: text => (
-        <a>{moment(text).format(`YYYY年MM月DD日 hh时mm分ss秒 `)}</a>
-      ),
+      render: text => moment(text).format(`YYYY年MM月DD日 hh时mm分ss秒 `),
     },
     {
       title: '更新文章',
@@ -86,6 +88,83 @@ function backContralTable(props: any) {
       ),
     },
   ];
+  const friendLinkColumns = [
+    {
+      title: '站点名字',
+      dataIndex: 'Linkname',
+      key: 'Linkname',
+    },
+    {
+      title: '邮箱地址',
+      dataIndex: 'Emilurl',
+      key: 'Emilurl',
+    },
+    {
+      title: '站点地址',
+      dataIndex: 'Linkurl',
+      key: 'Linkurl',
+      render: text => {
+        return (
+          <a href={text} target="black">
+            {text}
+          </a>
+        );
+      },
+    },
+    {
+      title: '站点描述',
+      dataIndex: 'Webdesc',
+      key: 'Webdesc',
+    },
+    {
+      title: '申请时间',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      render: text => moment(text).format(`YYYY年MM月DD日 hh时mm分ss秒 `),
+    },
+    {
+      title: '是否展示',
+      dataIndex: 'isShow',
+      key: 'isShow',
+      render: (text, record) => {
+        return (
+          <>
+            {' '}
+            <Radio.Group
+              defaultValue={text}
+              size="small"
+              onChange={e => {
+                dispatch({
+                  type: 'friendlink/upDateisShow',
+                  payload: {
+                    isShow: e.target.value,
+                    id: record.id,
+                  },
+                }).then(res => {
+                  if (res.success) {
+                    message.success(res.msg);
+                  } else {
+                    message.error(res.msg);
+                  }
+                });
+              }}
+            >
+              <Radio.Button value={true}>已展示</Radio.Button>
+              <Radio.Button value={false}>未展示</Radio.Button>
+            </Radio.Group>
+          </>
+        );
+      },
+    },
+    {
+      title: '删除该站点',
+      dataIndex: 'delet',
+      key: 'delet',
+      render: (text, record) => {
+        return <Button type="primary">删除</Button>;
+      },
+    },
+  ];
 
   return (
     <div className="table-box">
@@ -96,8 +175,17 @@ function backContralTable(props: any) {
         }
         pagination
       ></Table>
+      <Table
+        columns={friendLinkColumns}
+        dataSource={
+          props.friendlink?.allFriendLink ? props.friendlink.allFriendLink : ''
+        }
+        pagination
+      ></Table>
     </div>
   );
 }
 
-export default connect(background => background)(backContralTable);
+export default connect(({ background, friendlink }) => {
+  return { background, friendlink };
+})(backContralTable);
