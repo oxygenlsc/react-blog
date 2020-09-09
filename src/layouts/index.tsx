@@ -10,7 +10,7 @@ import Bg from '../components/background';
 export default function Index(props: any) {
   useEffect(() => {
     let url = '';
-    switch (getRandom(1, 7)) {
+    switch (getRandom(1, 5)) {
       case 1:
         url =
           'https://unpkg.com/live2d-widget-model-chitose@1.0.5/assets/chitose.model.json';
@@ -28,10 +28,6 @@ export default function Index(props: any) {
           'https://unpkg.com/live2d-widget-model-miku@1.0.5/assets/miku.model.json';
         break;
       case 5:
-        url =
-          'https://unpkg.com/live2d-widget-model-tsumiki@1.0.5/assets/tsumiki.model.json';
-        break;
-      case 6:
         url =
           'https://unpkg.com/live2d-widget-model-unitychan@1.0.5/assets/unitychan.model.json';
         break;

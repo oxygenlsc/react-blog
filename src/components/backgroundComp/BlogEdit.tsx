@@ -24,6 +24,9 @@ function BlogEdit(props: any) {
     tag: '',
     author: 'oxygen',
   });
+  const [position, setposition] = useState({
+    right: -700,
+  });
   const [isUpdate, setisUpdate] = useState(false);
   useEffect(() => {
     if (props.location.query?.blogid) {
@@ -129,7 +132,18 @@ function BlogEdit(props: any) {
           ref={e => {
             setsc(e);
           }}
+          style={{
+            right: position.right,
+          }}
         >
+          <div
+            className="btn-right"
+            onClick={() => {
+              setposition({
+                right: Math.abs(position.right) - 700,
+              });
+            }}
+          ></div>
           <ReactMarkdown
             source={inp}
             renderers={{

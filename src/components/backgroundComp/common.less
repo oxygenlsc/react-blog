@@ -13,9 +13,10 @@
   min-height: 670px;
   position: relative;
   background-color: #f4f5f5;
+  overflow: hidden;
   .edit-inp-box {
     position: absolute;
-    width: 30%;
+    width: 700px;
     height: 600px;
     border: 1px solid #000;
     top: 8%;
@@ -24,16 +25,28 @@
     font-size: 19px;
   }
   .show-html {
-    width: 30%;
+    width: 700px;
     height: 600px;
     top: 8%;
     border: 1px solid #000;
     position: absolute;
-    // transform: translateX(-30%);
-    left: 50%;
-    overflow: auto;
+    right: -700px;
     background-color: rgba(3, 3, 3, 0.466);
+    z-index: 666;
+    cursor: grab;
+    transition: right 1s cubic-bezier(0, 0.98, 0.1, 0.76);
   }
+  .btn-right {
+    top: 8%;
+    position: absolute;
+    border-left: 25px solid transparent;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-right: 25px solid lightblue;
+    left: -50px;
+    z-index: 99;
+  }
+
   .md-rule-show {
     position: fixed;
     width: 280px;
