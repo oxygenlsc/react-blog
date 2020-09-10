@@ -6,7 +6,7 @@ import { getStringArr } from '@/utils/util';
 import $ from 'jquery';
 import '@/assets/style/articdetail.less';
 import '@/assets/mdless/index.less';
-import { LikeTwoTone, EyeTwoTone } from '@ant-design/icons';
+import { LikeTwoTone, EyeTwoTone, LikeOutlined } from '@ant-design/icons';
 import { connect } from 'dva';
 function ArticDetail(props: any) {
   const { dispatch } = props;
@@ -87,7 +87,11 @@ function ArticDetail(props: any) {
   ));
   return (
     <div className="detail-content">
-      <div className="left-btn-box"></div>
+      <div className="left-btn-box">
+        <div className="artic-good-box">
+          <LikeOutlined />
+        </div>
+      </div>
       <div className="middle-article" id="md">
         <ReactMarkdown
           source={detailMsg.Bcontent}
