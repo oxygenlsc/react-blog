@@ -19,7 +19,7 @@ function LinkBox(props) {
   const [height, setspans] = useState(getRandom(150, 220));
   useEffect(() => {
     waterFull('link-item-box', 'friend-link-box', 200, 5);
-  }, []);
+  }, [data]);
   useEffect(() => {
     dispatch({
       type: 'friendlink/getAllLink',
@@ -38,7 +38,7 @@ function LinkBox(props) {
         {data.map((el, i) => (
           <LinkItem
             key={i}
-            height={height}
+            height={getRandom(150, 220)}
             bgC={`rgba(${getRandom(150, 220)},${getRandom(
               150,
               220,
@@ -47,6 +47,7 @@ function LinkBox(props) {
           />
         ))}
       </div>
+
       <div className="add-friend-link">
         <header className="des">
           <h3>友链申请</h3>
