@@ -33,7 +33,7 @@ function Index(props: any) {
     if (jujeres.success) {
       history.push('/edit');
       message.success('登录成功');
-      CookieDo.set('loginSuccess', true, '20m');
+      // CookieDo.set('loginSuccess', true, '20m');
     } else {
       message.error('请输入正确的账号密码');
     }
