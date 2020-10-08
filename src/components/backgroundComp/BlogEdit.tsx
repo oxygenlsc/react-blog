@@ -66,8 +66,8 @@ function BlogEdit(props: any) {
     setimgsend(!imgsend);
   };
   const onChange = ({ file }) => {
-    console.log(file.response);
-    if (file.response) {
+    console.log(file);
+    if (file.response?.data) {
       setFileList([...myfileList, file.response]);
     } else {
     }
@@ -78,7 +78,7 @@ function BlogEdit(props: any) {
     setdetail(!detail);
   };
   const pdata = {
-    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    action: '/api/uploadImg',
     listType: 'picture',
     // defaultFileList: [...myfileList],
     data: { id: 123 }, //这个地方就是上传时的标识
@@ -210,7 +210,9 @@ function BlogEdit(props: any) {
               <UploadOutlined /> Upload
             </Button>
           </Upload>
-          <ul className="urlList">{myfileList.map((el, i) => creatLi(el))}</ul>
+          <ul className="urlList">
+            {myfileList.map((el, i) => creatLi(el, i))}
+          </ul>
         </div>
         <div
           className="artic-detail"
@@ -329,13 +331,13 @@ function BlogEdit(props: any) {
   );
 }
 
-function creatLi(props) {
+function creatLi(props, i) {
   return (
-    <li className="url-list">
-      <div className="img-name">{props.name}</div>
+    <li className="url-list" key={i}>
+      {/* <div className="img-name">{props.msg}</div> */}
       <Tooltip title="点击复制链接">
         <div className="img-url" contentEditable="true">
-          {props.url}
+          {props.data}
         </div>
       </Tooltip>
     </li>

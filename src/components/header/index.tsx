@@ -52,11 +52,11 @@ function Index(props: any) {
                 &nbsp;
                 <span>首页</span>
               </NavLink>
-              <NavLink to="/a">
+              {/* <NavLink to="/a">
                 <RedditCircleFilled />
                 &nbsp;
                 <span>关于我</span>
-              </NavLink>
+              </NavLink> */}
               <NavLink to="/Map">
                 <FileImageFilled />
                 &nbsp;
@@ -67,11 +67,11 @@ function Index(props: any) {
                 &nbsp;
                 <span>友链</span>
               </NavLink>
-              <NavLink to="/f">
+              {/* <NavLink to="/f">
                 <SoundFilled />
                 &nbsp;
                 <span>留言板</span>
-              </NavLink>
+              </NavLink> */}
               <a href="http://oxygen.cool:12306/" target="black">
                 <DingtalkSquareFilled />
                 &nbsp;

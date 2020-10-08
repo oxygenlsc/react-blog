@@ -69,7 +69,7 @@ function ArticDetail(props: any) {
     <li
       key={i}
       style={{
-        color: curTitle == el ? 'rgb(0, 195, 255)' : '#ccc',
+        color: curTitle == el ? 'rgb(0, 195, 255)' : '#000',
       }}
       onClick={() => {
         setcurTitle(el);
@@ -78,7 +78,7 @@ function ArticDetail(props: any) {
       <a
         href={`#${el}`}
         style={{
-          color: curTitle == el ? 'rgb(0, 195, 255)' : '#ccc',
+          color: curTitle == el ? 'rgb(0, 195, 255)' : '#000',
         }}
       >
         {el}
@@ -128,7 +128,7 @@ function ArticDetail(props: any) {
             top: Fixed ? '70px' : '',
           }}
         >
-          <h2 style={{ color: '#fff' }}>文章目录</h2>
+          <h2 style={{ color: '#000' }}>文章目录</h2>
           <ul className="menu-box">{liList}</ul>
         </div>
       </div>
