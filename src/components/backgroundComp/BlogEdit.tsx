@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './common.less';
 import ReactMarkdown from 'react-markdown';
 import { Input, Upload, Button, Tooltip, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, CopyOutlined } from '@ant-design/icons';
 // import ImgCrop from 'antd-img-crop';
 import { Button1, Button2 } from '@/components/signButton/Button';
 import HeadingBlock from '../mdHeading/headingBolck';
@@ -68,7 +68,10 @@ function BlogEdit(props: any) {
   const onChange = ({ file }) => {
     console.log(file);
     if (file.response?.data) {
-      setFileList([...myfileList, file.response]);
+      let msg = inp + `\n![](${file.response?.data} ''图片title'')`;
+      setinp(msg);
+
+      // setFileList([...myfileList, file.response]);
     } else {
     }
   };
@@ -91,30 +94,6 @@ function BlogEdit(props: any) {
   };
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <Button1
-        type="oneStyle"
-        title="语法展开"
-        top="80px"
-        left="30px"
-        bg="#f80"
-        click={showAndHide}
-      />
-      <Button2
-        type="oneStyle"
-        title="上传图片"
-        top="80px"
-        left="120px"
-        bg="lightblue"
-        click={showImg}
-      />
-      <Button2
-        type="oneStyle"
-        title="文章细节"
-        top="80px"
-        left="210px"
-        bg=""
-        click={showDetail}
-      />
       <div className="edit-warpper">
         <TextArea
           value={inp}
@@ -131,9 +110,6 @@ function BlogEdit(props: any) {
           id="md"
           ref={e => {
             setsc(e);
-          }}
-          style={{
-            right: position.right,
           }}
         >
           <div
@@ -155,8 +131,15 @@ function BlogEdit(props: any) {
           className="md-rule-show"
           style={{ opacity: rule ? 1 : 0, height: rule ? 500 : 0 }}
         >
-          # 这是一级标题 ## 这是二级标题 ### 这是三级标题 #### 这是四级标题
-          ##### 这是五级标题 ###### 这是六级标题
+          # 这是一级标题
+          <br />
+          ## 这是二级标题 <br />
+          ### 这是三级标题 <br />
+          #### 这是四级标题
+          <br />
+          ##### 这是五级标题 <br />
+          ###### 这是六级标题
+          <br />
           <br />
           **这是加粗的文字** *这是倾斜的文字*` ***这是斜体加粗的文字***
           ~~这是加删除线的文字~~
@@ -201,130 +184,123 @@ function BlogEdit(props: any) {
           cond(no)->op <br />
           &```
         </div>
-        <div
-          className="send-img"
-          style={{ opacity: imgsend ? 1 : 0, height: imgsend ? 500 : 0 }}
-        >
-          <Upload {...pdata} onChange={onChange}>
+        <div className="send-img">
+          <Upload {...pdata} onChange={onChange} className="img-send-btn">
             <Button>
               <UploadOutlined /> Upload
             </Button>
           </Upload>
+          <div className="show-rule-btn" onClick={showAndHide}>
+            <CopyOutlined />
+          </div>
           <ul className="urlList">
             {myfileList.map((el, i) => creatLi(el, i))}
           </ul>
         </div>
-        <div
-          className="artic-detail"
-          style={{ opacity: detail ? 1 : 0, height: detail ? 500 : 0 }}
-        >
-          {detail ? (
-            <>
-              <div className="atrc-title">
-                <h1>标题</h1>
-                <Input
-                  className="title"
-                  value={blogDetail.title}
-                  onChange={e => {
-                    setDetail('title', e.target.value);
-                  }}
-                  disabled={isUpdate}
-                ></Input>
-              </div>
-              <div className="atrc-des">
-                <h1>解释</h1>
-                <TextArea
-                  className="des"
-                  value={blogDetail.des}
-                  onChange={e => {
-                    setDetail('des', e.target.value);
-                  }}
-                  disabled={isUpdate}
-                ></TextArea>
-              </div>
-              <div className="atrc-tg">
-                <h1>标签</h1>
-                <Input
-                  className="tag"
-                  value={blogDetail.tag}
-                  onChange={e => {
-                    setDetail('tag', e.target.value);
-                  }}
-                  disabled={isUpdate}
-                ></Input>
-              </div>
-              <div className="atrc-author">
-                <h1>作者</h1>
-                <Input
-                  className="author"
-                  value={blogDetail.author}
-                  onChange={e => {
-                    setDetail('author', e.target.value);
-                  }}
-                  disabled={isUpdate}
-                ></Input>
-              </div>
-              <div className="submit">
-                <Button
-                  disabled={isUpdate}
-                  shape="round"
-                  type="primary"
-                  onClick={() => {
-                    const addData = {
-                      Bauthor: blogDetail.author,
-                      Btitle: blogDetail.title,
-                      Bdesc: blogDetail.des,
-                      Btags: blogDetail.tag,
-                      Bcontent: inp,
-                    };
-                    for (const key in addData) {
-                      if (addData.hasOwnProperty(key)) {
-                        const el = addData[key];
-                        if (el == '') {
-                          message.error('请输入' + key);
-                          return;
-                        }
-                      }
+        <div className="artic-detail">
+          <div className="atrc-title">
+            <h1>标题</h1>
+            <Input
+              className="title"
+              value={blogDetail.title}
+              onChange={e => {
+                setDetail('title', e.target.value);
+              }}
+              disabled={isUpdate}
+            ></Input>
+          </div>
+          <div className="atrc-des">
+            <h1>解释</h1>
+            <TextArea
+              className="des"
+              value={blogDetail.des}
+              onChange={e => {
+                setDetail('des', e.target.value);
+              }}
+              disabled={isUpdate}
+            ></TextArea>
+          </div>
+          <div className="atrc-tg">
+            <h1>标签</h1>
+            <Input
+              className="tag"
+              value={blogDetail.tag}
+              onChange={e => {
+                setDetail('tag', e.target.value);
+              }}
+              disabled={isUpdate}
+            ></Input>
+          </div>
+          <div className="atrc-author">
+            <h1>作者</h1>
+            <Input
+              className="author"
+              value={blogDetail.author}
+              onChange={e => {
+                setDetail('author', e.target.value);
+              }}
+              disabled={isUpdate}
+            ></Input>
+          </div>
+          <div className="submit">
+            <Button
+              disabled={isUpdate}
+              shape="round"
+              type="primary"
+              onClick={() => {
+                const addData = {
+                  Bauthor: blogDetail.author,
+                  Btitle: blogDetail.title,
+                  Bdesc: blogDetail.des,
+                  Btags: blogDetail.tag,
+                  Bcontent: inp,
+                };
+                for (const key in addData) {
+                  if (addData.hasOwnProperty(key)) {
+                    const el = addData[key];
+                    if (el == '') {
+                      message.error('请输入' + key);
+                      return;
                     }
-                    dispatch({
-                      type: 'blog/addBlog',
-                      payload: addData,
-                    }).then(res => {
-                      message.success(res.msg);
-                    });
-                  }}
-                >
-                  提交blog
-                </Button>
+                  }
+                }
+                dispatch({
+                  type: 'blog/addBlog',
+                  payload: addData,
+                }).then(res => {
+                  message.success(res.msg);
+                });
+              }}
+            >
+              提交blog
+            </Button>
 
-                <Button
-                  type="primary"
-                  disabled={!isUpdate}
-                  shape="round"
-                  onClick={() => {
-                    let flag = true;
-                    if (flag) {
-                      flag = false;
-                      dispatch({
-                        type: 'background/updateBlogs',
-                        payload: {
-                          id: props.location.query?.blogid,
-                          content: inp,
-                        },
-                      }).then(res => {
-                        if (res.success) {
-                          message.success(res.msg);
-                          flag = true;
-                        }
-                      });
+            <Button
+              type="primary"
+              disabled={!isUpdate}
+              shape="round"
+              onClick={() => {
+                let flag = true;
+                if (flag) {
+                  flag = false;
+                  dispatch({
+                    type: 'background/updateBlogs',
+                    payload: {
+                      id: props.location.query?.blogid,
+                      content: inp,
+                    },
+                  }).then(res => {
+                    if (res.success) {
+                      message.success(res.msg);
+                      flag = true;
                     }
-                  }}
-                >
-                  确认修改
-                </Button>
-              </div>
-            </>
-          ) : null}
+                  });
+                }
+              }}
+            >
+              确认修改
+            </Button>
+          </div>
         </div>
       </div>
     </div>
