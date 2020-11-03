@@ -6,8 +6,15 @@ import { getStringArr } from '@/utils/util';
 import $ from 'jquery';
 import '@/assets/style/articdetail.less';
 import '@/assets/mdless/index.less';
-import { LikeTwoTone, EyeTwoTone, LikeOutlined } from '@ant-design/icons';
+import {
+  LikeTwoTone,
+  EyeTwoTone,
+  LikeOutlined,
+  MoneyCollectOutlined,
+} from '@ant-design/icons';
 import { connect } from 'dva';
+import { Popover, message } from 'antd';
+import money from '@/assets/imgs/money.png';
 function ArticDetail(props: any) {
   const { dispatch } = props;
   useEffect(() => {
@@ -16,16 +23,7 @@ function ArticDetail(props: any) {
       type: 'id',
       id,
     };
-    dispatch({
-      type: 'blog/getDetail',
-      payload: senddata,
-    }).then(res => {
-      console.log(res);
-      if (res.success) {
-        setdetailMsg(res.data);
-        setmenuitem(getStringArr(res.data.Bcontent, '~~'));
-      }
-    });
+    getBlogDetail(senddata);
   }, []);
   useEffect(() => {
     const harr = $('#md h1');
@@ -60,6 +58,18 @@ function ArticDetail(props: any) {
       window.removeEventListener('scroll', scroolEve);
     };
   }, []);
+  const getBlogDetail = senddata => {
+    dispatch({
+      type: 'blog/getDetail',
+      payload: senddata,
+    }).then(res => {
+      console.log(res);
+      if (res.success) {
+        setdetailMsg(res.data);
+        setmenuitem(getStringArr(res.data.Bcontent, '~~'));
+      }
+    });
+  };
   const [detailMsg, setdetailMsg] = useState({});
   const [Fixed, setFixed] = useState(false);
   const [menuitem, setmenuitem] = useState([]);
@@ -89,7 +99,39 @@ function ArticDetail(props: any) {
     <div className="detail-content">
       <div className="left-btn-box">
         <div className="artic-good-box">
-          <LikeOutlined />
+          <LikeOutlined
+            onClick={async () => {
+              const id = props.location.query.id;
+              const { dispatch } = props;
+              const data = await dispatch({
+                type: 'blog/updateBlike',
+                payload: {
+                  id: id,
+                },
+              });
+              if (data.success) {
+                message.success(data.msg);
+                const senddata = {
+                  type: 'id',
+                  id,
+                };
+                getBlogDetail(senddata);
+              } else {
+                message.warn(data.msg);
+              }
+            }}
+          />
+          <Popover
+            title="觉得不错可以支持支持博主"
+            content={
+              <img
+                style={{ width: '150px', height: '150px' }}
+                src={money}
+              ></img>
+            }
+          >
+            <MoneyCollectOutlined />
+          </Popover>
         </div>
       </div>
       <div className="middle-article" id="md">

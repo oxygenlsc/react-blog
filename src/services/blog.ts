@@ -7,6 +7,7 @@ const BlogMethods = {
   getAllBlog: `/api/app/blog/getAllblog`,
   getUpdateBlogDetail: `/api/app/blog/getBlogDetail`, //修改页面的回显
   updateBlog: `/api/app/blog/updateBlog`,
+  updateBlike: `/api/app/blog/BlikeBlog`,
 };
 const APIFunction: any = {};
 
