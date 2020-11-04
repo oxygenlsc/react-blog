@@ -1,7 +1,9 @@
 import gen from './index';
 // import {  API_PATIENT ,API_ORDER} from '../utils/constant';
+import { API } from './commWord';
+
 const TagMethods = {
-  getTagList: `/api/app/tag/selectAllTag`, //获取博客列表
+  getTagList: `${API}/app/tag/selectAllTag`, //获取博客列表
 };
 const APIFunction: any = {};
 

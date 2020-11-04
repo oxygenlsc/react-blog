@@ -1,7 +1,9 @@
 import gen from './index';
 // import {  API_PATIENT ,API_ORDER} from '../utils/constant';
+import { API } from './commWord';
+
 const TagMethods = {
-  LoginByAccunt: `/api/app/Login/selectAdmin`,
+  LoginByAccunt: `${API}/app/Login/selectAdmin`,
 };
 const APIFunction: any = {};
 

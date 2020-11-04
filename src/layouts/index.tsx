@@ -6,8 +6,11 @@ import { getRandom } from '@/utils/util';
 import { L2Dwidget } from 'live2d-widget';
 import { CookieDo } from '@/utils/util';
 import Bg from '../components/background';
+import { connect } from 'dva';
+import { Spin } from 'antd';
+import { LoadingOutlined, SmileOutlined } from '@ant-design/icons';
 
-export default function Index(props: any) {
+function Index(props: any) {
   useEffect(() => {
     let url = '';
     switch (getRandom(1, 5)) {
@@ -100,10 +103,14 @@ export default function Index(props: any) {
     <div>
       <Bg></Bg>
       <Header />
-      <div className="body-content">{props.children}</div>
-      {/* <Footer>
-
-           </Footer> */}
+      <Spin
+        spinning={props.global}
+        indicator={
+          <SmileOutlined style={{ fontSize: 100, color: '#f80' }} spin />
+        }
+      >
+        <div className="body-content">{props.children}</div>
+      </Spin>
       <div className="mobile-content">
         <div className="msg-box">
           mobile 页面博主不想写拉 等有时间再写吧，所以打开你的
@@ -114,3 +121,4 @@ export default function Index(props: any) {
     </div>
   );
 }
+export default connect(({ loading }) => loading)(Index);
