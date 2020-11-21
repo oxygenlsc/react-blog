@@ -81,7 +81,7 @@ function BlogEdit(props: any) {
     setdetail(!detail);
   };
   const pdata = {
-    action: '/api/uploadImg',
+    action: '/uploadImg',
     listType: 'picture',
     // defaultFileList: [...myfileList],
     data: { id: 123 }, //这个地方就是上传时的标识

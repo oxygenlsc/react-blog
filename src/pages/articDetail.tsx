@@ -86,7 +86,7 @@ function ArticDetail(props: any) {
       }}
     >
       <a
-        href={`#${el}`}
+        href={`#${el} ~~`}
         style={{
           color: curTitle == el ? 'rgb(0, 195, 255)' : '#fff',
         }}
