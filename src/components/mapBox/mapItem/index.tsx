@@ -19,7 +19,7 @@ export default function MapItem(props: any) {
           标题：{props?.data?.Btitle}
         </Link>
         <div className="map-b-time">
-          发布时间：{moment(props?.data?.updatedAt).format('YYYY年 MM月 DD日')}
+          发布时间：{moment(props?.data?.createdAt).format('YYYY年 MM月 DD日')}
         </div>
         <div className="map-b-Tag">标签：{props?.data?.Btags}</div>
       </div>

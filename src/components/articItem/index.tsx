@@ -20,7 +20,7 @@ export default function Index(props?: itemProps) {
       <div className="des">
         <div className="time">
           <CalendarTwoTone twoToneColor="#eb2f96" />:
-          {moment(props.artic.updatedAt).format('YYYY年MM月DD日 hh时mm分ss秒 ')}
+          {moment(props.artic.createdAt).format('YYYY年MM月DD日 hh时mm分ss秒 ')}
         </div>
         <div className="tag">
           <TagTwoTone twoToneColor="#52c41a" />:{props.artic.Btags}
