@@ -72,11 +72,11 @@ function Index(props: any) {
                 &nbsp;
                 <span>留言板</span>
               </NavLink> */}
-              <a href="http://oxygen.cool:12306/" target="black">
+              {/* <a href="http://oxygen.cool:12306/" target="black">
                 <DingtalkSquareFilled />
                 &nbsp;
                 <span>OldBlog</span>
-              </a>
+              </a> */}
             </div>
           </Col>
         </Row>

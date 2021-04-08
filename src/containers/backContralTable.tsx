@@ -16,13 +16,15 @@ function backContralTable(props: any) {
       type: 'background/backgroundGetItem',
       payload: limit,
     });
+  }, [limit]);
+  useEffect(() => {
     dispatch({
       type: 'friendlink/selectFriendLinkByPage',
       payload: {
         page: linkpage,
       },
     });
-  }, []);
+  }, [linkpage]);
   const columns = [
     {
       title: '标题',
@@ -55,6 +57,7 @@ function backContralTable(props: any) {
       title: '最后更新时间',
       key: 'updatedAt',
       dataIndex: 'updatedAt',
+      width: 250,
       render: text => moment(text).format(`YYYY年MM月DD日 hh时mm分ss秒 `),
     },
     {
@@ -120,6 +123,7 @@ function backContralTable(props: any) {
       title: '申请时间',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
+      width: 250,
       render: text => moment(text).format(`YYYY年MM月DD日 hh时mm分ss秒 `),
     },
     {
@@ -169,18 +173,34 @@ function backContralTable(props: any) {
   return (
     <div className="table-box">
       <Table
+        scroll={{ y: 400 }}
         columns={columns}
         dataSource={
           props.background.backgroundBlog ? props.background.backgroundBlog : ''
         }
-        pagination
+        pagination={{
+          onChange: data => {
+            setlimit({
+              page: data,
+              limit: 10,
+            });
+          },
+          total: props.background.backgroundTotle,
+        }}
       ></Table>
       <Table
+        scroll={{ y: 400 }}
         columns={friendLinkColumns}
         dataSource={
           props.friendlink?.allFriendLink ? props.friendlink.allFriendLink : ''
         }
-        pagination
+        pagination={{
+          onChange: data => {
+            setlinkpage(data);
+          },
+          total: props.friendlink.friendLinkTotal,
+        }}
+        // pagination
       ></Table>
     </div>
   );

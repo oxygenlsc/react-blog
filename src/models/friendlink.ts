@@ -10,6 +10,7 @@ export default {
   namespace: 'friendlink',
   state: {
     allFriendLink: [],
+    friendLinkTotal: 0,
   },
   effects: {
     *addFriendLink({ payload }, { call, put, select }) {
@@ -29,6 +30,10 @@ export default {
         type: 'saveAllLink',
         payload: response.data.data,
       });
+      yield put({
+        type: 'saveTotal',
+        payload: response.data.total,
+      });
       return response.data;
     },
     *upDateisShow({ payload }, { call, put, select }) {
@@ -45,6 +50,12 @@ export default {
       return {
         ...state,
         allFriendLink: action.payload,
+      };
+    },
+    saveTotal(state, action) {
+      return {
+        ...state,
+        friendLinkTotal: action.payload,
       };
     },
   },
