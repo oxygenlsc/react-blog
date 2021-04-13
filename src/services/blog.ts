@@ -8,7 +8,7 @@ const BlogMethods = {
   addBlog: `POST ${API}/app/blog/addblog`,
   getAllBlog: `${API}/app/blog/getAllblog`,
   getUpdateBlogDetail: `${API}/app/blog/getBlogDetail`, //修改页面的回显
-  updateBlog: `${API}/app/blog/updateBlog`,
+  updateBlog: `POST ${API}/app/blog/updateBlog`,
   updateBlike: `${API}/app/blog/BlikeBlog`,
 };
 const APIFunction: any = {};
